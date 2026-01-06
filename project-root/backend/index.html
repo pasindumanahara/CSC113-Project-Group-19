@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2>User Login</h2>
+
+    <form id="loginForm">
+        Email: <input type="email" name="email" required><br><br>
+        Password: <input type="password" name="password" required><br><br>
+        <button type="submit">Send</button>
+    </form>
+
+    <!--
+ user login successfull or not serverside message
+ also any error occuring while username password entering will be record here
+-->
+    <p id="result"></p>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+            e.preventDefault(); // Prevent default behaviour/reload
+
+            const email = this.email.value.trim();
+            const password = this.password.value;
+
+            if (email === '' || password === '') {
+                showError("Email and password are required");
+                return;
+            }
+
+            // email format check
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                // TODO :: error message
+                showError("Invalid email format");
+                return;
+            }
+
+            // ajax
+            sendLoginRequest(email, password);
+        });
+
+        function showError(msg) {
+            document.getElementById("result").innerText = msg;
+        }
+
+        function sendLoginRequest(email, password) {
+            const formData = new FormData();
+            formData.append("email", email);
+            formData.append("password", password);
+
+            fetch("login.php", {
+                method: "POST",
+                body: formData
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        document.write("loged in");
+                    } else {
+                        showError(data.message);
+                    }
+                })
+                .catch(() => showError("Network error"));
+        }
+    </script>
+
+</body>
+
+</html>

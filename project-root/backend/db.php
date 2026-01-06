@@ -1,20 +1,19 @@
-<?php  
-    $DB_HOST = "localhost";
-    $DB_NAME = "movie";
-    $DB_USER = "root";
-    $DB_PASSWORD = "1234";
+<?php
+    // Data base details
+    $host = 'localhost';
+    $db   = 'movie';
+    $user = 'root';
+    $pass = '1234';
 
-    $options = [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    ];
+    // Creating the connection using PDO
     try {
-        $pdo = new PDO("mysql:host=$DB_HOST;dbname=$DB_NAME;charset=utf8mb4", $DB_USER, $DB_PASSWORD, $options);
+        $pdo = new PDO(
+            "mysql:host=$host;dbname=$db;charset=utf8mb4",
+            $user,
+            $pass,
+            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION] // Exception handeling
+        );
     } catch (PDOException $e) {
-        http_response_code(500);
-        echo "Database connection failed: " . htmlspecialchars($e->getMessage());
-        exit;
+        die("DB Connection failed: " . $e->getMessage());
     }
-
 ?>
-
