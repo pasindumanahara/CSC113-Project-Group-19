@@ -56,7 +56,7 @@
                 .then(res => res.json())
                 .then(data => {
                     if (data.status === "success") {
-                        document.write("loged in");
+                        window.location.href = "logout.html";
                     } else {
                         showError(data.message);
                     }
