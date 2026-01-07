@@ -17,6 +17,7 @@
     $stmt = $conn->prepare("INSERT INTO users (email, hashed_password, role) VALUES (:email, :hashed_password, :role)");
 
     try {
+        // Seting values when qury executing
         $stmt->execute([
             ':email' => $email,
             ':hashed_password' => $password_hashed,
@@ -24,6 +25,7 @@
         ]);
         echo "User inserted successfully";
     } catch (PDOException $e) {
+        // Catch any error
         echo "Error inserting user: " . $e->getMessage();
     }
 

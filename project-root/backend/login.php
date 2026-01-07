@@ -3,6 +3,7 @@
     session_start();
     require_once 'db.php';
 
+    // Type
     header('Content-Type: application/json');
 
     // Check method before handle data
@@ -39,7 +40,8 @@
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($password, $user['hashed_password'])) {
-            // Session regeneration security
+            // Session data about email for later use in for front-end and back-end
+            // ----- should clear these on logout.php 
             $_SESSION['email'] = $user['email'];
 
             // Successful login attempt
