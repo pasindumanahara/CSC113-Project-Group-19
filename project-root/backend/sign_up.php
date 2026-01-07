@@ -1,4 +1,9 @@
 <?php 
+    //////////////////////////////////////////////
+
+    // TODO :: email will be a candidate key so check for uniqueness 
+
+
     session_start();
 
     // Requiring db.php for once
@@ -53,7 +58,7 @@
             ':pass' => $hashed_password,
             ':role' => $user_type        
         ]);
-        
+
         // Add to session values
         $_SESSION['name'] = $user['name'];
         $_SESSION['email'] = $user['email'];
