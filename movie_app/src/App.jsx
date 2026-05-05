@@ -29,7 +29,8 @@ export default function App() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const API_KEY = "875a977ab94cd7108c47a3bed943830f";
+  // Enter your own API key 
+  const API_KEY = "";
 
   async function searchMovies(e) {
     e.preventDefault();
